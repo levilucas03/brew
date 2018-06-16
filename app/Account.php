@@ -22,4 +22,14 @@ class Account extends Model
         // Save the group in account
         Account::create($data);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_accounts');
+    }
+
+    public function hasAccount($check)
+    { 
+        return in_array($check, array_fetch($this->users->toArray(), 'name'));
+    }
 }
