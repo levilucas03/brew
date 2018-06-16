@@ -42,4 +42,9 @@ class User extends Authenticatable
 
         return $user->count();
     }
+
+    public function accounts()
+    {
+        return $this->belongsToMany('App\Account', 'user_accounts');
+    }
 }
