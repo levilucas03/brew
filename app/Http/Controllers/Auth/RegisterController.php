@@ -65,13 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {  
-       $this->add_registered_user_account($data);
+       $account = $this->add_registered_user_account($data);
 
-        return User::create([
+       $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->accounts()->attach($account);
+
+        return $user;
     }
 
     /**
@@ -80,13 +84,18 @@ class RegisterController extends Controller
      */
     public function add_registered_user_account($data) {
 
-        // Check for group before making same one
-        $account = Account::where('name', $data['group'])->first();
+        // Check for group before creating one
+        $account = Account::where('name', $data['group'])->first()->id;
 
         if(!$account) {
-            $acount = $data;
-            $account['name'] = $data['group'];
-            Account::create($account);
+            $a = new Account;
+            $a->name = $data['group'];
+            $a->created_at = date("Y-m-d H:i:s");
+            $a->updated_at = date("Y-m-d H:i:s");
+            $a->save();
+            $account = $a->id;
         }
+
+        return $account;
     }
 }
