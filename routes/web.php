@@ -11,18 +11,22 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/brew', 'brewController@index')->name('brew');
+Route::get('/dashboard', 'brewController@index')->name('brew');
 
-Route::get('/whosnext', 'brewController@getUser');
+Route::get('/brewtime', 'brewController@brewed_user');
 
-Auth::routes();
 
 Route::resource('admin/users', 'UserController')->only([
     'index', 'show'
 ]);
 
+Route::resource('admin/account', 'AccountController')->only([
+    'index', 'show', 'create'
+]);
 
 
 
