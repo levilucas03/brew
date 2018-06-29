@@ -36,7 +36,10 @@ class BrewController extends Controller
 
     function brewed_user()
     {
-        $last_user = Brew::orderBy('created_at', 'DESC')->first();
+        $last_user = Brew::orderBy('created_at', 'DESC')->first() ?: 0;
+        // if(!$last_user){
+        //     $last_user = 0;
+        // }
         $user = User::inRandomOrder()->where('id', '!=', $last_user->user_id)->first();
         
         $brew = new Brew;

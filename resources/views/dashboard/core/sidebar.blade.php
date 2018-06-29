@@ -1,18 +1,13 @@
 <h4>Users in the group</h4>
-@foreach($users as $key => $user)
-
-<tr>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-</tr>
-
-@endforeach
+<ul class="vertical menu">
+    @foreach($users as $key => $user)
+        <li>{{ $user->name }}</li>
+    @endforeach
+</ul>
 
 <h4>Accounts</h4>
-@foreach($accounts as $key => $account)
-
-<tr>
-    <td>{{ $account->name }}</td>
-</tr>
-
-@endforeach
+<ul class="vertical menu">
+    @foreach($accounts as $key => $account)
+        <li>{{ $account->name }}</li>
+    @endforeach
+</ul>

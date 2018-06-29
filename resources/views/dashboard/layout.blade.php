@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    @include('dashboard.core.topbar')
     <div class="container">
         <div class="grid-x grid-padding-x">
             <div class="cell medium-4">
@@ -21,6 +22,7 @@
         </footer>
     </div>
     <script src="/js/app.js"></script>
+    <script> $(document).foundation();</script>
     @yield('scripts')
 </body>
 </html>
